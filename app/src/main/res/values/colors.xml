@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <color name="primary">#009688</color> <!-- teal -->
+        <color name="primary_dark">#00695C</color>
+        <color name="accent">#A5D6A7</color> <!-- light green -->
+        <color name="bg_light">#F7FAF9</color>
+        <color name="grey">#616161</color>
+        <color name="black">#000000</color>
+        <color name="white">#FFFFFF</color>
+        <color name="gray">#808080</color>
+
+</resources>

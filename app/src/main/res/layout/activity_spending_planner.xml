@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_light"
+    android:padding="16dp"
+    tools:context=".SpendingPlannerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spending Planner"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Budget Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBudget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            android:elevation="6dp"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_budget"
+                    android:background="@drawable/icon_bg"
+                    android:padding="10dp"
+                    android:contentDescription="Budget Icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Budget Planner"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/primary_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plan and track your monthly budget."
+                        android:textSize="15sp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/grey" />
+
+                    <Button
+                        android:id="@+id/btnOpenBudget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Debt Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDebt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            android:elevation="6dp"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_debt"
+                    android:background="@drawable/icon_bg"
+                    android:padding="10dp"
+                    android:contentDescription="Debt Icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Debt Tracker"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/primary_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Manage and monitor your debts easily."
+                        android:textSize="15sp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/grey" />
+
+                    <Button
+                        android:id="@+id/btnOpenDebt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Bills Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardBills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            android:elevation="6dp"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_bills"
+                    android:background="@drawable/icon_bg"
+                    android:padding="10dp"
+                    android:contentDescription="Bills Icon" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bill Reminders"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/primary_dark" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Stay on top of your bill due dates."
+                        android:textSize="15sp"
+                        android:layout_marginTop="4dp"
+                        android:textColor="@color/grey" />
+
+                    <Button
+                        android:id="@+id/btnOpenBills"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

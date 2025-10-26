@@ -1,0 +1,68 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_light"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Debt Tracker"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/inputDebtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter debt name (e.g., Credit Card)"
+            android:padding="12dp"
+            android:backgroundTint="@color/primary" />
+
+        <EditText
+            android:id="@+id/inputAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter amount owed"
+            android:inputType="numberDecimal"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/primary" />
+
+        <EditText
+            android:id="@+id/inputDueDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter due date"
+            android:inputType="date"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/primary" />
+
+        <Button
+            android:id="@+id/btnAddDebt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Debt"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/textDebtList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No debts added yet."
+            android:textColor="@color/grey"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

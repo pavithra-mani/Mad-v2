@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mad-v2</string>
+    <string-array name="budget_categories">
+        <item>Food</item>
+        <item>Rent</item>
+        <item>Travel</item>
+        <item>Shopping</item>
+        <item>Entertainment</item>
+    </string-array>
+
+</resources>
