@@ -160,7 +160,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/ic_bills"
+                    android:src="@drawable/ic_bill"
                     android:background="@drawable/icon_bg"
                     android:padding="10dp"
                     android:contentDescription="Bills Icon" />
