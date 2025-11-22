@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#FFFFFF">
+
+        <!-- Bill Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textBillName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bill for: [Electricity Provider]"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1B5E20"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/textBillAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Amount: \$75.50"
+                android:textSize="16sp"
+                android:textColor="#388E3C"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/textBillDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Due: 2025-12-31"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="6dp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Action Buttons (Modify/Delete) -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="16dp">
+
+            <!-- Modify/Edit Button -->
+            <ImageButton
+                android:id="@+id/btnModifyBill"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="Modify Bill"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="#FFC107"
+                android:padding="8dp"/>
+
+            <!-- Delete Button -->
+            <ImageButton
+                android:id="@+id/btnDeleteBill"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_delete"
+                android:contentDescription="Delete Bill"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="#D32F2F"
+                android:padding="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

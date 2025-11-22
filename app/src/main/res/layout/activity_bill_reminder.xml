@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F7F4"
-    android:fillViewport="true">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <!-- Toolbar Section -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_reminders"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="#1B5E20"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_reminders"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#1B5E20"
-            android:elevation="4dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/navHome_reminders"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:contentDescription="Home"
+                app:tint="@android:color/white"
+                android:layout_marginEnd="16dp"/>
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/goldleaf_logo"
+                android:contentDescription="Goldleaf Logo"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:text="Goldleaf"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
-                <ImageView
-                    android:id="@+id/navHome_reminders"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_home"
-                    android:contentDescription="Home"
-                    app:tint="@android:color/white"
-                    android:layout_marginEnd="16dp"/>
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/goldleaf_logo"
-                    android:contentDescription="Goldleaf Logo"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Goldleaf"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+    <!-- Main Content Area (Scrollable) -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,6 +60,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Title: Corrected to Bill Reminders -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,6 +69,16 @@
                 android:textStyle="bold"
                 android:textColor="#1B5E20"
                 android:layout_marginBottom="24dp" />
+
+            <!-- Input Section for New Bill Reminder -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set New Bill Reminder"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#388E3C"
+                android:layout_marginBottom="12dp" />
 
             <EditText
                 android:id="@+id/inputBillName"
@@ -89,16 +102,20 @@
                 android:drawablePadding="12dp"
                 android:drawableTint="#388E3C" />
 
+            <!-- Date Picker Implementation: Uses EditText but is configured for programmatic date selection -->
             <EditText
-                android:id="@+id/inputBillDate"
+                android:id="@+id/inputDueDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Due date"
-                android:inputType="date"
+                android:hint="Select Due Date"
                 android:padding="12dp"
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="#388E3C"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
                 android:drawableStart="@drawable/ic_calendar"
+                android:drawableEnd="@drawable/ic_arrow_down"
                 android:drawablePadding="12dp"
                 android:drawableTint="#388E3C" />
 
@@ -110,19 +127,28 @@
                 android:backgroundTint="#388E3C"
                 android:textColor="@android:color/white"
                 android:paddingVertical="14dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginBottom="32dp"/>
 
+            <!-- RecyclerView Section for Existing Bills -->
             <TextView
-                android:id="@+id/textBillList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No bills added yet. Manage your upcoming payments here."
-                android:textColor="#757575"
-                android:layout_marginTop="32dp"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
+                android:text="Upcoming Bill Reminders (Modify or Delete)"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1B5E20"
+                android:layout_marginBottom="16dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewBills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:minHeight="200dp"
+                android:paddingBottom="48dp"
+                android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

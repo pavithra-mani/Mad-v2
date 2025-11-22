@@ -1,17 +1,191 @@
 package com.example.mad_v2
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.mad_v2.databinding.ActivityBillReminderBinding
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mad_v2.adapters.BillAdapter
+import com.example.mad_v2.adapters.BillClickListener
+import com.example.mad_v2.data.Bill
+import com.example.mad_v2.data.BillViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+import com.example.mad_v2.R
 
-class BillReminderActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityBillReminderBinding
+
+/**
+ * Activity for managing Bill Reminders using a Room database and ViewModel.
+ * Implements Date Picker, Add/Modify Bill functionality, and BillAdapter click listeners.
+ */
+class BillReminderActivity : AppCompatActivity(), BillClickListener {
+
+    private lateinit var inputBillName: EditText
+    private lateinit var inputBillAmount: EditText
+    private lateinit var inputDueDate: EditText
+    private lateinit var btnAddBill: Button
+    private lateinit var recyclerViewBills: RecyclerView
+    private lateinit var billAdapter: BillAdapter
+    private lateinit var billViewModel: BillViewModel
+
+    // State variable to track if the user is currently modifying an existing bill
+    private var billToModify: Bill? = null
+
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+    private val calendar = Calendar.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityBillReminderBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_bill_reminder) // Corrected resource ID based on file list
+
+        // 1. Initialize ViewModel - This provides the data from the Room database
+        billViewModel = ViewModelProvider(this).get(BillViewModel::class.java)
+
+        // 2. Initialize Views
+        inputBillName = findViewById(R.id.inputBillName)
+        inputBillAmount = findViewById(R.id.inputBillAmount)
+        inputDueDate = findViewById(R.id.inputDueDate)
+        btnAddBill = findViewById(R.id.btnAddBill)
+        recyclerViewBills = findViewById(R.id.recyclerViewBills)
+
+        // 3. Setup RecyclerView and LiveData Observer
+        val initialBillList = mutableListOf<Bill>()
+        billAdapter = BillAdapter(initialBillList, this)
+        recyclerViewBills.adapter = billAdapter
+
+        // Observe the LiveData from the ViewModel
+        // Any change in the database (insert, update, delete) will automatically update the RecyclerView
+        billViewModel.allBills.observe(this) { bills ->
+            // The list of bills is already sorted by dueDate in the BillDao
+            billAdapter.updateData(bills)
+        }
+
+        // 4. Implement Date Picker
+        inputDueDate.setOnClickListener {
+            showDatePicker()
+        }
+
+        // 5. Implement Add/Modify Reminder Button
+        btnAddBill.setOnClickListener {
+            saveBillReminder()
+        }
+    }
+
+    /**
+     * Shows a DatePickerDialog and updates the inputDueDate EditText upon selection.
+     */
+    private fun showDatePicker() {
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                inputDueDate.setText(dateFormat.format(calendar.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
+
+    /**
+     * Handles both adding a new bill and updating an existing bill based on the 'billToModify' state.
+     */
+    private fun saveBillReminder() {
+        val name = inputBillName.text.toString().trim()
+        val amountText = inputBillAmount.text.toString().trim()
+        val dueDate = inputDueDate.text.toString().trim()
+
+        if (name.isEmpty() || amountText.isEmpty() || dueDate.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val amount = amountText.toDoubleOrNull()
+        if (amount == null) {
+            Toast.makeText(this, "Invalid amount entered.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (billToModify != null) {
+            // Case 1: MODIFICATION (Update existing bill in the database)
+            // This is now possible because the Bill properties are 'var'
+            billToModify!!.name = name
+            billToModify!!.amount = amount
+            billToModify!!.dueDate = dueDate
+            billViewModel.update(billToModify!!)
+            Toast.makeText(this, "Reminder modified successfully!", Toast.LENGTH_SHORT).show()
+        } else {
+            // Case 2: NEW BILL (Insert new bill into the database)
+            // The 'id' will be auto-generated by Room (default value 0 in the data class)
+            val newBill = Bill(name, amount, dueDate)
+            billViewModel.insert(newBill)
+            Toast.makeText(this, "Reminder added successfully!", Toast.LENGTH_SHORT).show()
+        }
+
+        // Reset UI state
+        resetForm()
+    }
+
+    /**
+     * Clears the input fields and resets the modification state.
+     */
+    private fun resetForm() {
+        inputBillName.text.clear()
+        inputBillAmount.text.clear()
+        inputDueDate.text.clear()
+        billToModify = null
+        btnAddBill.text = "Add Reminder"
+    }
+
+    // --- BillClickListener Implementation ---
+
+    /**
+     * Handles the Modify click event by loading the bill's data into the input form
+     * and switching the main button to 'Save Changes'.
+     */
+    override fun onModifyBill(bill: Bill) {
+        // Set the bill we are currently modifying
+        billToModify = bill
+
+        // Populate form fields
+        inputBillName.setText(bill.name)
+        inputBillAmount.setText(bill.amount.toString())
+        inputDueDate.setText(bill.dueDate)
+
+        // Change button text to indicate modification mode
+        btnAddBill.text = "Save Changes (Modifying ID: ${bill.id})"
+
+        Toast.makeText(this, "Form loaded for editing: ${bill.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * Handles the Delete click event.
+     * Confirms deletion with an AlertDialog and deletes via the ViewModel.
+     */
+    override fun onDeleteBill(bill: Bill) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Reminder")
+            .setMessage("Are you sure you want to delete the reminder for ${bill.name}?")
+            .setPositiveButton("Delete") { dialog, _ ->
+                billViewModel.delete(bill) // Delete via ViewModel, which interacts with Room
+                Toast.makeText(this, "${bill.name} deleted.", Toast.LENGTH_SHORT).show()
+
+                // If the deleted item was the one currently loaded in the form, reset the form.
+                if (bill.id == billToModify?.id) {
+                    resetForm()
+                }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+            .show()
     }
 }
