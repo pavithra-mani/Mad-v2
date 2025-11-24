@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0F7F4"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="#F0F7F4">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:paddingStart="8dp">
 
                 <ImageView
                     android:id="@+id/navHome_budget"
@@ -33,19 +34,12 @@
                     android:src="@drawable/ic_home"
                     android:contentDescription="Home"
                     app:tint="@android:color/white"
-                    android:layout_marginEnd="16dp"/>
-
-                <ImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@drawable/goldleaf_logo"
-                    android:contentDescription="Goldleaf Logo"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="12dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Goldleaf"
+                    android:text="Budget Planner"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white" />
@@ -61,126 +55,137 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50/30/20 Budget Planner"
-                android:textSize="26sp"
+                android:text="Custom Budget Planner"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#1B5E20"
-                android:layout_marginBottom="24dp" />
+                android:layout_marginBottom="12dp"/>
 
+            <!-- Income -->
             <EditText
                 android:id="@+id/inputIncome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter total monthly income"
+                android:hint="Enter monthly income"
                 android:inputType="numberDecimal"
                 android:padding="12dp"
-                android:layout_marginBottom="24dp"
-                android:backgroundTint="#388E3C"
-                android:drawableStart="@drawable/ic_money"
-                android:drawablePadding="12dp"
-                android:drawableTint="#388E3C" />
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#388E3C"/>
 
-            <Button
-                android:id="@+id/btnCalculate"
+            <!-- Payday selector -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Calculate 50/30/20 Budget"
-                android:layout_marginBottom="32dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btnSetPayday"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Select Next Pay Day"
+                    android:backgroundTint="#1B5E20"
+                    android:textColor="@android:color/white"/>
+
+                <TextView
+                    android:id="@+id/textPayDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Not set"
+                    android:textColor="#1B5E20"
+                    android:layout_marginStart="12dp"/>
+            </LinearLayout>
+
+            <!-- New Item area -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Budget Item"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"
+                android:textColor="#1B5E20"/>
+
+            <EditText
+                android:id="@+id/inputTitle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Optional title (e.g., 'April groceries')"
+                android:inputType="text"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/inputCustomCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter custom category"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/inputAmount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Amount"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="12dp"/>
+
+            <Button
+                android:id="@+id/btnAddItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Item"
                 android:backgroundTint="#388E3C"
                 android:textColor="@android:color/white"
-                android:paddingVertical="14dp"
-                android:textSize="18sp" />
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Totals -->
+            <TextView
+                android:id="@+id/textTotalAllocated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total allocated: ₹0.00"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"
+                android:textColor="#1B5E20"/>
+
+            <TextView
+                android:id="@+id/textRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remaining: ₹0.00"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"
+                android:textColor="#D32F2F"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginBottom="12dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Budget Breakdown:"
-                android:textColor="#1B5E20"
-                android:textSize="20sp"
+                android:text="Saved Items"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="12dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp"
-                android:background="@drawable/circle_bg_light_green"> <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="50% Needs (Rent, Groceries)"
                 android:textColor="#1B5E20"
-                android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/textBudgetNeeds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="#388E3C"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                android:layout_marginBottom="8dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0"
-                android:layout_marginVertical="8dp"/>
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBudgets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp"
-                android:background="@drawable/circle_bg_light_green">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="30% Wants (Fun, Dining Out)"
-                    android:textColor="#1B5E20"
-                    android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/textBudgetWants"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="#388E3C"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0"
-                android:layout_marginVertical="8dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp"
-                android:background="@drawable/circle_bg_light_green">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="20% Savings &amp; Debt"
-                    android:textColor="#1B5E20"
-                    android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/textBudgetSavings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="₹0.00"
-                    android:textColor="#388E3C"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-
+                android:nestedScrollingEnabled="false"/>
 
         </LinearLayout>
     </LinearLayout>
