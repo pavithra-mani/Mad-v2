@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val spendingDashboardButton = findViewById<Button>(R.id.btnSpendingDashboard)
         val billReminderButton = findViewById<Button>(R.id.btnBillReminder)
         val debtReminderButton = findViewById<Button>(R.id.btnDebtReminder)
+        val transactionTrackerButton = findViewById<Button>(R.id.btnTransactionTracker)
 
         chatBotButton.setOnClickListener {
             val intent = Intent(this, ChatbotActivity::class.java)
@@ -43,6 +44,10 @@ class MainActivity : AppCompatActivity() {
         debtReminderButton.setOnClickListener {
             val intent = Intent(this, DebtTrackerActivity::class.java)
             startActivity(intent)
+        }
+
+        transactionTrackerButton.setOnClickListener {
+            startActivity(Intent(this, AddTransactionActivity::class.java))
         }
 
         enableEdgeToEdge()

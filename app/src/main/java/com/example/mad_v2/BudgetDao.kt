@@ -19,4 +19,14 @@ interface BudgetDao {
 
     @Query("SELECT SUM(amount) FROM budget_items")
     suspend fun getTotalAllocated(): Double?
+
+
+    @Query("UPDATE budget_items SET amount = amount - :spent WHERE category = :category")
+    suspend fun reduceBudget(spent: Double, category: String)
+
+    @Query("UPDATE budget_items SET amount = amount - :spentAmount WHERE category = :category")
+    suspend fun updateBudgetAfterTransaction(category: String, spentAmount: Double)
+
+
+
 }

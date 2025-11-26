@@ -51,5 +51,7 @@
             android:name=".StatsActivity"
             android:exported="false" />
 
+        <activity android:name=".TransactionsActivity"/>
+
     </application>
 </manifest>

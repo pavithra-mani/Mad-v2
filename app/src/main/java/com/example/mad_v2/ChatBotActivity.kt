@@ -35,7 +35,7 @@ class ChatbotActivity : AppCompatActivity() {
     }
 
     private fun sendMessage(text: String) {
-        messages.add(ChatMessage(text, isUser = true))
+          messages.add(ChatMessage(text, isUser = true))
         adapter.notifyItemInserted(messages.size - 1)
         binding.chatRecyclerView.smoothScrollToPosition(messages.size - 1)
         botReply(text)
