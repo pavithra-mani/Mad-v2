@@ -16,6 +16,7 @@ pluginManagement {
     plugins {
         // ⬅️ FIX: Updated KSP version to 2.0.21-1.0.28 to match the implied Kotlin 2.0.21 version.
         id("com.google.devtools.ksp") version "2.0.21-1.0.28" apply false
+        id("kotlin-kapt")
     }
 }
 dependencyResolutionManagement {
