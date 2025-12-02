@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "993670341262",
+    "project_id": "goldleaf-a1ecf",
+    "storage_bucket": "goldleaf-a1ecf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:993670341262:android:08bd2292fa4707c5239fdf",
+        "android_client_info": {
+          "package_name": "com.example.mad_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCn7f3d4UWQ0xMt7wsTLPNXKwjBXm90p7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

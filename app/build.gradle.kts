@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     // You APPLY the KSP plugin here
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -78,5 +79,13 @@ dependencies {
 
     // ConstraintLayout
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Import the Firebase BOM to manage dependency versions
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+
+    // Dependency for Firebase Authentication (required for FirebaseAuth class)
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+
 
 }

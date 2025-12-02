@@ -8,11 +8,27 @@ import androidx.core.view.WindowInsetsCompat
 
 import android.content.Intent
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
+
+        val logoutBtn = findViewById<Button>(R.id.btnLogout)
+        logoutBtn.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
 
         val chatBotButton = findViewById<Button>(R.id.btnChatBot)
         val budgetPlannerButton = findViewById<Button>(R.id.btnBudgetPlanner)

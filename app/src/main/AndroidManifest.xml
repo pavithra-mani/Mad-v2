@@ -59,5 +59,14 @@
         <activity android:name=".TransactionsActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+
     </application>
 </manifest>
