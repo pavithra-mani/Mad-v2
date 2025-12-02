@@ -25,4 +25,7 @@ interface BillDao {
 
     @Query("SELECT * FROM bill_table WHERE id = :billId")
     suspend fun getBillById(billId: Int): Bill?
+
+    @Query("SELECT * FROM bill_table ORDER BY dueDate ASC")
+    suspend fun getAllBillsForDashboard(): List<Bill>
 }

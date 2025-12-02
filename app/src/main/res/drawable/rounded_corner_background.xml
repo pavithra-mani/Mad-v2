@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- White fill color for the background -->
+    <solid android:color="@android:color/white" />
+
+    <!-- Define the radius for the rounded corners -->
+    <corners android:radius="8dp" />
+
+    <!-- Optional: Add a light grey stroke for better separation on white screens -->
+    <stroke
+        android:width="1dp"
+        android:color="#CCCCCC" />
+</shape>

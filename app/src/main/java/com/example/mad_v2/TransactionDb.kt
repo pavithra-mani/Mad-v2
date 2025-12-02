@@ -5,11 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Transaction::class, Budget::class], version = 2)
+// Database version is set to 3 to incorporate Transaction, Budget, and Bill entities
+@Database(entities = [Transaction::class, Budget::class, Bill::class], version = 3, exportSchema = false)
 abstract class TransactionDb : RoomDatabase() {
 
     abstract fun transactionDao(): TransactionDao
     abstract fun budgetDao(): BudgetDao
+    abstract fun billDao(): BillDao
 
     companion object {
         @Volatile
@@ -21,7 +23,11 @@ abstract class TransactionDb : RoomDatabase() {
                     context.applicationContext,
                     TransactionDb::class.java,
                     "expense_db"
-                ).build().also { INSTANCE = it }
+                )
+                    // FIX: Allows the database to be recreated when the version changes (e.g., from 2 to 3)
+                    // This resolves the "migration not found" IllegalStateException.
+                    .fallbackToDestructiveMigration()
+                    .build().also { INSTANCE = it }
             }
     }
 }

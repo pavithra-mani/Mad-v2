@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Date -->
+            <!-- Date - MODIFIED to include an icon and explicit clickability -->
             <TextView
                 android:id="@+id/dateValue"
                 android:layout_width="match_parent"
@@ -67,8 +67,14 @@
                 android:text="Select Date"
                 android:textSize="16sp"
                 android:padding="12dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/rounded_corner_background"
+                android:drawableEnd="@android:drawable/ic_menu_today"
+                android:drawablePadding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
                 android:layout_marginBottom="16dp"/>
+            <!-- NOTE: You may need to define 'rounded_corner_background' drawable for white background -->
 
             <Button
                 android:id="@+id/saveButton"
@@ -77,11 +83,12 @@
                 android:text="Save Transaction"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:background="#4CAF50"
+                android:backgroundTint="#4CAF50"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
     </ScrollView>
 
+    <!-- BOTTOM NAV (Kept as is for context) -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
